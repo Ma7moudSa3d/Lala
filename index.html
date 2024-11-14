@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #2d3e50;
+      color: #fefefe;
+    }
+
+    .countdown {
+      text-align: center;
+      font-size: 2rem;
+    }
+
+    .countdown span {
+      font-size: 3rem;
+      font-weight: bold;
+      display: inline-block;
+      min-width: 80px;
+    }
+  </style>
+</head>
+<body>
+  <div class="countdown">
+    <p>Time Left Until I MET </p>
+    <p class="lala">LALA  <3 </p>
+    <div id="timer">
+      <span id="days">00</span> Days
+      <span id="hours">00</span> Hours
+      <span id="minutes">00</span> Minutes
+      <span id="seconds">00</span> Seconds
+    </div>
+  </div>
+
+  <script>
+    function countdown() {
+      const targetDate = new Date("November 29, 2024 00:00:00").getTime();
+
+      const timerInterval = setInterval(() => {
+        const now = new Date().getTime();
+        const timeLeft = targetDate - now;
+
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          document.getElementById("timer").innerHTML = "Time's up!";
+          return;
+        }
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById("days").textContent = days.toString().padStart(2, "0");
+        document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+        document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
+        document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
+      }, 1000);
+    }
+
+    countdown();
+  </script>
+</body>
+</html>
